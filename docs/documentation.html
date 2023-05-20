@@ -98,8 +98,9 @@
         <li class="nav-item"><a class="nav-link active" href="#idocs_start">Getting Started</a>
           <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_html_structure">HTML Structure</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_sass">Sass</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_html_structures">Instances</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_html_structure">Security Groups</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_sass">Load Balancers</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_color_schemes">Color Schemes</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_theme_customization">Customization</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_logo_settings">Logo Settings</a></li>
@@ -179,103 +180,74 @@
         <!-- Installation
 		============================ -->
         <section id="idocs_installation">
-          <h2>Installation</h2>
-          <p class="lead">Follow the steps below to setup your site template:</p>
-          <ol>
-            <li>Unzip the downloaded package and open the <strong>/HTML</strong> folder to find all the template files. You will need to upload these files to your hosting web server using FTP or localhost in order to use it on your website.</li>
-            <li>Below is the folder structure and needs to be uploaded to your website or localhost root directory:
-            <ul>
-			<li><code>HTML/assets</code> - Contains all of the assets referenced
-			  <ul>
-                <li><code>HTML/css</code> - Stylesheet files</li>
-                <li><code>HTML/images</code> - Images files</li>
-                <li><code>HTML/js</code> - Javacript files</li>
-                <li><code>HTML/sass</code> - Sass files</li>
-                <li><code>HTML/vendor</code> – All external libs.</li>
-              </ul>
-			</li>
-			<li><code>HTML/../index.html</code> - Homepage
-			</ul>
-            </li>
-            <li>You should upload all or specific HTML files as per your need.</li>
-            <li>You are good to go for adding your content now!</li>
-          </ol>
+          <h2>AWS VMs Installation</h2>
+          <p class="lead">Follow the steps below to setup your AWS Web Server:</p>
+          <li>This part of the guide shows the installation of <strong>Virtual Machines</strong> and <strong>Load Balancers</strong> in Amazon AWS.</li>
         </section>
         
 		<hr class="divider">
 		
+        <section id="idocs_html_structures">
+          <h2>Instances</h2>
+          <p>Instances are the virtual machines on which all programmes and scripts will subsequently be installed.</p>
+            <ol>
+              <li>Firstly, it is needed to go into your <a href = "https://console.aws.amazon.com/">AWS Management Console</a> and enter the <strong>EC2</strong> section. In this example, the <strong>free trial</strong> period is used.<br><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109484239604432936/image.png?width=1366&height=682" class="img-fluid" alt="Responsive image">
+              <li>Next, click on the <strong>"Launch instance"</strong> button to create the virtual machine.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109484430206193684/image.png?width=1369&height=682" class="img-fluid" alt="Responsive image">
+              <li>Then specify the parameters for creating the virtual machine, such as machine name, operating system, machine type and so on. You then need to specify the parameters for creating the virtual machine, such as machine name, operating system, machine type, and so on. To start with, let's specify a name.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109485726296449135/image.png?width=697&height=144" class="img-fluid" alt="Responsive image">
+              <li>Then comes the choice of operating system and kernel architecture. In our case the SSD from the <strong>free trial</strong> and the <strong>64-bit (x86)</strong> kernel are used.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109485823075815494/image.png?width=699&height=627" class="img-fluid" alt="Responsive image">
+              <li>Next, selecting the type of the instance. Still using the free trial version.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109485916789161985/image.png?width=701&height=221" class="img-fluid" alt="Responsive image">
+              <li>Next you need to create <strong>key pair</strong> to connect to the machine via SSH. Otherwise we won't be able to connect to it via a third-party SSH client, nor will we be able to set up automatic machine synchronisation. <br>To do this, enter the key name, select <strong>RSA</strong> type, select the <strong>.pem</strong> format, create the key and download it.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109485964625195148/image.png?width=696&height=177" class="img-fluid" alt="Responsive image"><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109486086704611358/image.png?width=537&height=613" class="img-fluid" alt="Responsive image">
+              <li>In the network configuration, a security group must be created and all traffic must be allowed to access this web page.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109486266912886804/image.png?width=696&height=629" class="img-fluid" alt="Responsive image">
+              <li>In the storage configuration select the minimum parameters offered by AWS, as there are many limits in the free version.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109486410068672645/image.png?width=694&height=322" class="img-fluid" alt="Responsive image">
+              <li>At the end, specify that we need 2 instances and create them.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109486557381009438/image.png?width=323&height=682" class="img-fluid" alt="Responsive image">
+            </ol>
+      <hr class="divider">
         <!-- HTML Structure
 		============================ -->
         <section id="idocs_html_structure">
-          <h2>HTML Structure</h2>
-          <p>iDocs follows a simple and easy to customize coding structure. Here is the sample for your reference:<br>
-            The template is based on <a class="ml-1" target="_blank" href="https://getbootstrap.com/"><i class="fas fa-external-link-alt"></i> Bootstrap Framework</a></p>
-          <pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-
-&lt;!-- Your Title, Description, Stylesheets
-============================================= --&gt;
-
-&lt;/head&gt;
-
-&lt;body data-spy=&quot;scroll&quot; data-target=&quot;.idocs-navigation&quot; data-offset=&quot;125&quot;&gt;
-
-&lt;!-- Document Wrapper   
-=============================== --&gt;
-&lt;div id=&quot;main-wrapper&quot;&gt; 
-  
-  &lt;!-- Header
-  ============================ --&gt;
-  &lt;header id=&quot;header&quot; class=&quot;sticky-top&quot;&gt;
-   ......
-  &lt;/header&gt;
-  &lt;!-- Header End --&gt; 
-  
-  &lt;!-- Content
-  ============================ --&gt;
-  &lt;div id=&quot;content&quot; role=&quot;main&quot;&gt; 
-    
-    &lt;!-- Sidebar Navigation
-    ============================ --&gt;
-    &lt;div class=&quot;idocs-navigation bg-light&quot;&gt;
-     .....
-    &lt;/div&gt;
-    
-    &lt;!-- Docs Content
-    ============================ --&gt;
-    &lt;div class=&quot;idocs-content&quot;&gt;
-      &lt;div class=&quot;container&quot;&gt;
-        .......
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;!-- Content end --&gt; 
-  
-  &lt;!-- Footer --&gt;
-  &lt;footer id=&quot;footer&quot; class=&quot;section bg-dark footer-text-light&quot;&gt;
-    &lt;div class=&quot;container&quot;&gt; ...... &lt;/div&gt;
-  &lt;/footer&gt;
-  &lt;!-- Footer end --&gt; 
-  
-&lt;/div&gt;
-&lt;!-- Document Wrapper end --&gt; 
-
-&lt;!-- JavaScript --&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-          <p class="alert alert-info">If you need more information, please visit bootstrap site: <a target="_blank" href="https://getbootstrap.com/docs/4.4/layout/grid/">https://getbootstrap.com</a></p>
-        </section>
-        
+          <h2>Security Groups</h2>
+            <ol>
+              <li>Before load balancers can be created, target groups must be created to define the machines. To do this, go to the relevant section and click on <strong>"Create target group"</strong>.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109486875799986176/image.png?width=1383&height=682" class="img-fluid" alt="Responsive image">
+              <li>In the first point select what the target groups will use to identify the machines, be it ip address or vpc. In our case the <strong>"Instances"</strong> type is used.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109487109225598996/image.png?width=721&height=569" class="img-fluid" alt="Responsive image">
+              <li>Next, specify the name of the target group and the VPC of instances you wish to link.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109487365061361674/image.png?width=719&height=485" class="img-fluid" alt="Responsive image">
+              <li>At the end you will need to bind the Instances and you will see them in this window.</li><br>
+              <img src="https://media.discordapp.net/attachments/1109484213033517107/1109487794184782045/image.png?width=1439&height=672" class="img-fluid" alt="Responsive image">
+            </ol>
 		<hr class="divider">
 		        
 		<!-- Sass
 		============================ -->
         <section id="idocs_sass">
-          <h2>Sass</h2>
-          <p>We have added SASS <code>.scss</code> files in template. If you know how to use SASS you can change sass files and compile the css as well.
-            You can find sass file here - <code>HTML/assets/sass</code></p>
-          <p>Open the <code>sass/_variables.scss</code> and Edit the values according to your needs. If you need more Advanced Setup then you can Edit the Respective Files yourself which have been branched inside the same Folder. It is completely at your discretion only to include the Required <code>.scss</code> Files you need to minimize the amount of CSS & including only the Styles of the Blocks you need. This can be setup in your <code>stylesheet.scss</code> File.</p>
+          <h2>Load Balancers</h2>
+          <p>Load Balancer (LB) is a critical component of any distributed system. It helps spread the traffic across a cluster of servers to improve the responsiveness and availability of applications, websites, or databases.
+            Typically a load balancer sits between the client and the server accepting incoming network and application traffic and distributing the traffic across multiple backend servers using various algorithms. By balancing application requests across multiple servers, a load balancer reduces individual server load and prevents any one application server from becoming a single point of failure, thus improving overall application availability and responsiveness.</p>
+          <ol>
+            <li>To create load balancers, you need to go to the appropriate category next to Security Groups and click on <strong>"Create load balancer"</strong>.</li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488038888886322/image.png?width=1377&height=682" class="img-fluid" alt="Responsive image">
+            <li>Choose <strong>Application Load Balancer</strong></li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488281428693042/image.png?width=824&height=682" class="img-fluid" alt="Responsive image">
+            <li>Specify the name of the load balancer, its scheme and type of ip address</li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488485494161449/image.png?width=971&height=440" class="img-fluid" alt="Responsive image">
+            <li>Next, fill in the Network mapping. Specify VPC and Mappings. To be on the safe side, select <strong>all Availability Zones</strong> at once, as if you don't select the zone in which you have instances, then you will need to specify it again.</li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488677186437180/image.png?width=969&height=550" class="img-fluid" alt="Responsive image">
+            <li>Next, select the same Security Group in which you have instances.</li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488768114757682/image.png?width=971&height=225" class="img-fluid" alt="Responsive image">
+            <li>In the last step, you can leave the default settings and save load balancer.</li><br>
+            <img src="https://media.discordapp.net/attachments/1109484213033517107/1109488864994791554/image.png?width=968&height=465" class="img-fluid" alt="Responsive image">
+          </ol>
         </section>
         
 		<hr class="divider">
