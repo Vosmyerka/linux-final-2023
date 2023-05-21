@@ -101,16 +101,13 @@
             <li class="nav-item"><a class="nav-link" href="#idocs_html_structures">Instances</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_html_structure">Security Groups</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_sass">Load Balancers</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_color_schemes">Color Schemes</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_theme_customization">Customization</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_logo_settings">Logo Settings</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_layout">Layout</a>
+        <li class="nav-item"><a class="nav-link" href="#idocs_layout">Software Installation</a>
           <ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
-			<li class="nav-item"><a class="nav-link" href="#idocs_navbar">Navbar</a></li>
-			<li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Sidebar</a></li>
+			<li class="nav-item"><a class="nav-link" href="#idocs_header">LAMP Stack</a></li>
+			<li class="nav-item"><a class="nav-link" href="#idocs_navbar">Postfix</a></li>
+			<li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Rsync & Inotify</a></li>
 			<li class="nav-item"><a class="nav-link" href="#idocs_footer">Footer</a></li>
 			<li class="nav-item"><a class="nav-link" href="#idocs_box_layout">Box Layout</a></li>
           </ul>
@@ -252,307 +249,155 @@
         
 		<hr class="divider">
 		
-		<!-- Color Schemes
-		============================ -->
-        <section id="idocs_color_schemes">
-          <h2>Color Schemes</h2>
-          <p>You can change your Website's Color Scheme in an instant. We have build <strong>10 Color</strong> css file for change template primary color.</p>
-          <ul>
-            <li><code>color-blue.css</code> - Blue Color</li>
-            <li><code>color-brown.css</code> - Brown Color</li>
-            <li><code>color-cyan.css</code> - Cyan Color</li>
-            <li><code>color-green.css</code> - Green Color</li>
-            <li><code>color-orange.css</code> - Orange Color</li>
-            <li><code>color-indigo.css</code> - Indigo Color</li>
-            <li><code>color-purple.css</code> - Purple Color</li>
-            <li><code>color-red.css</code> - Red Color</li>
-            <li><code>color-teal.css</code> - Teal Color</li>
-            <li><code>color-yellow.css</code> - Yellow Color</li>
-          </ul>
-          <p>Simply add Color CSS file link it in the Document <code>&lt;head&gt;</code>.<br>
-            Make sure you add the <code>css/color-blue.css</code> stylesheet in your head after the <code>css/stylesheet.css</code> file linking from above mentioned 10 color css file.</p>
-          <p><strong>For Example:</strong></p>
-          <pre><code class="html">&lt;head&gt;
-&lt;!-- Stylesheet
-============================== --&gt;
-&lt;!-- Bootstrap --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/bootstrap/css/bootstrap.min.css&quot; /&gt;
-&lt;!-- Font Awesome Icon --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/font-awesome/css/all.min.css&quot; /&gt;
-&lt;!-- Magnific Popup --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/magnific-popup/magnific-popup.min.css&quot; /&gt;
-&lt;!-- Highlight Syntax --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/highlight.js/styles/github.css&quot; /&gt;
-&lt;!-- Custom Stylesheet --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/css/stylesheet.css&quot; /&gt;
-
-&lt;!-- Here goes your Colors Css --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/css/color-orange.css&quot; /&gt;
-&lt;/head&gt;</code></pre>
-        </section>
-        
-		<hr class="divider">
-		
-		<!-- Customization
-		============================ -->
-        <section id="idocs_theme_customization">
-          <h2>Theme Customization</h2>
-          <p>We have include a Custom CSS File in the <code>css</code> Folder so that you can better handle your Customizations for New Styles or
-            Overwriting Default Theme Styles. Simply add all your Custom CSS Codes in the <code>css/custom.css</code> File and link it in the Document <code>&lt;head&gt;</code> after the <code>css/stylesheet.css</code> Linking. Also make sure that this is the Last Linked CSS File in the Document <code>&lt;head&gt;</code> so that your Custom CSS Styles are Overwritten properly.</p>
-          <pre><code class="html">&lt;head&gt;
-&lt;!-- Stylesheet
-============================== --&gt;
-&lt;!-- Bootstrap --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/bootstrap/css/bootstrap.min.css&quot; /&gt;
-&lt;!-- Font Awesome Icon --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/font-awesome/css/all.min.css&quot; /&gt;
-&lt;!-- Magnific Popup --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/magnific-popup/magnific-popup.min.css&quot; /&gt;
-&lt;!-- Highlight Syntax --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/vendor/highlight.js/styles/github.css&quot; /&gt;
-&lt;!-- Custom Stylesheet --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/css/stylesheet.css&quot; /&gt;
-
-&lt;!-- Here goes your custom.css
-============================================= --&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;assets/css/custom.css&quot; /&gt;
-&lt;/head&gt;</code></pre>
-        </section>
-        
-		<hr class="divider">
-		
-        <!-- Logo Settings
-		============================ -->
-        <section id="idocs_logo_settings">
-          <h2>Logo Settings</h2>
-          <p>The Logo Container can be found in the Header Container - <code>&lt;header&gt;</code></p>
-          <pre><code class="html">&lt;!-- Logo --&gt; 
-&lt;a class=&quot;logo ml-3 ml-md-0&quot; href=&quot;../index.html&quot; title=&quot;iDocs&quot;&gt;
-   &lt;img src=&quot;images/logo-light.png&quot; alt=&quot;iDocs&quot;/&gt;
-&lt;/a&gt;
-&lt;!-- Logo End --&gt;
-</code></pre>
-        </section>
-		
-        
-		<hr class="divider">
-		
 		<!-- Layout
 		============================ -->
         <section id="idocs_layout">
-          <h2>Layout</h2>
-          <p class="lead mb-5">Documentation and examples for header, navbar, sidebar, footer</p>
+          <h2>Software Installation</h2>
+          <p class="lead mb-5">Documentation of installation all the software which was used in the project.</p>
         </section>
 		
 		
         <!-- Header
 		============================ -->
         <section id="idocs_header">
-          <h2>Header</h2>
-          <p>The list of various header types & its descriptions are provided below for your reference:</p>
-          
-          <h4>Light</h4>
-          <p>Header with white background Color & Dark text. <span class="text-info">See below image and code for more information.</span></p>
-          <p><a class="popup-img" href="assets/images/header-light.jpg"><img class="img-fluid border" src="assets/images/header-light.jpg" alt=""></a></p>
-          <pre><code class="html">&lt;!-- Header
-============================ --&gt;
-&lt;header id=&quot;header&quot; class=&quot;sticky-top&quot;&gt; 
-  &lt;!-- Navbar --&gt;
-  &lt;nav class=&quot;primary-menu navbar navbar-expand-lg&quot;&gt;
-    &lt;div class=&quot;container-fluid&quot;&gt; 
-      .....
-    &lt;/div&gt;
-  &lt;/nav&gt;
-  &lt;!-- Navbar End --&gt; 
-&lt;/header&gt;
-&lt;!-- Header End --&gt;
-</code></pre>
-        
-          <h4>Dark</h4>
-          <p>Header with dark background & Light text. <span class="text-info">See below image and code for more information.</span></p>
-          <p><a class="popup-img" href="assets/images/header-dark.jpg"><img class="img-fluid border" src="assets/images/header-dark.jpg" alt=""></a></p>
-          <p>Add the <code>.bg-dark</code> and <code>.navbar-text-light</code> Class to the <code>&lt;nav&gt;</code> Tag to display a Dark Header.</p>
-          <pre><code class="html">&lt;!-- Header
-============================ --&gt;
-&lt;header id=&quot;header&quot; class=&quot;sticky-top&quot;&gt; 
-  &lt;!-- Navbar --&gt;
-  &lt;nav class=&quot;primary-menu navbar navbar-expand-lg bg-dark navbar-text-light&quot;&gt;
-    &lt;div class=&quot;container-fluid&quot;&gt; 
-      .....
-    &lt;/div&gt;
-  &lt;/nav&gt;
-  &lt;!-- Navbar End --&gt; 
-&lt;/header&gt;
-&lt;!-- Header End --&gt;
-</code></pre>
-        </section>
-		
+          <h2>LAMP Stack</h2>
+          <p>To install the LAMP Stack, I used <a href="https://usefulangle.com/post/324/aws-ec2-install-linux-apache-mysql-php-phpmyadmin-lamp-stack-ubuntu-20-04">this guide</a> which describes in detail everything that needs to be done</p>
+          <h3>Commands to install LAMP Stack</h4>
+          <h4>Updating the Package List</h3>
+            <p>Update the package list on the instance so that we can have the latest available versions of Apache, PHP, MySql and phpMyAdmin.</p>
+          <p><code>sudo apt-get update</code></p>
+          <h4>Installing Apache</h4>
+            <p><li>Install Apache through the following command :</li></p>
+          <p><code>sudo apt-get install apache2</code></p>
+            <p>Note that it will install the latest available version of Apache.</p>
+            <p><li>A successful installation of Apache can be checked by typing in the Public IP address / DNS of the instance in the browser. This can be found from the AWS EC2 management page.<br><br>
+              Successfully installed Apache will look like :</li></p>
+              <img src="https://usefulangle.com/img/posts/324/10.png" class="img-fluid" alt="Responsive image">
+          <h4>Installing MySQL</h4>
+              <p><li>Install MySQL using the following command :</li></p>
+          <p><code>sudo apt-get install mysql-server</code></p>
+          <p><li>After installation is complete, the mysql database is strengthened using the following command:</li></p>
+          <p><code>sudo mysql_secure_installation</code></p>
+          <p><li>In the next screen we will be asked whether we need to setup VALIDATE PASSWORD plugin. We selected <strong>no</strong>.</li></p>
+          <p><li><strong>Set the password for the root MySql account.</strong></li></p>
+          <p><li>Remove anonymous users? We selected <strong>yes</strong>.</li></p>
+          <p><li>Disallow root login remotely? We selected <strong>no</strong>.</li></p>
+          <p><li>Remove test database and access to it? We chose <strong>yes</strong>.</li></p>
+          <p><li>Reload privilege tables now? We again chose <strong>yes</strong>.</li></p>
+          <p><li>Following installation we can login into MySQL by executing the following command:</li></p>
+          <p><code>sudo mysql -u root -p</code></p>
+          <p>Entering the password in the prompt, we can login into MySQL and will be greeted by the mysql prompt. Type exit to get out of MySQL.</p>
+          <h4>Installing PHP with Common Extensions</h4>
+          <p><li>Install PHP and commonly used extensions through the following command.</li></p>
+          <p><code>sudo apt-get install php libapache2-mod-php php-mysql php-curl php-gd php-json php-zip</code></p>
+          <p>The latest available version of PHP (7.4.3 as of May, 2020) will be installed.</p>
+          <p><li>After PHP has been installed, restart Apache using the following command:</li></p>
+          <p><code>sudo service apache2 restart</code></p>
+          <h4>Installing phpMyAdmin</h4>
+          <p><li>Install phpMyAdmin through the command :</li></p>
+          <p><code>sudo apt-get install phpmyadmin</code></p>
+          <img src="https://usefulangle.com/img/posts/324/14.png" class="img-fluid" alt="Responsive image">
+          <p><li>In the next screen select the <strong>apache2</strong> webserver.</li></p>
+          <img src="https://usefulangle.com/img/posts/324/15.png" class="img-fluid" alt="Responsive image">
+          <p>It is important to note here, <strong>space-bar is pressed to select the option, tab is pressed to move to Ok button</strong>. Correctly selected apache2 will look like :</p>
+          <img src="https://usefulangle.com/img/posts/324/16.png" class="img-fluid" alt="Responsive image">
+          <p><li>In the next screen for <strong>dbconfig-common</strong> configuration, choose <strong>Yes</strong></li></p>
+          <img src="https://usefulangle.com/img/posts/324/17.png" class="img-fluid" alt="Responsive image">
+          <p><li>By default, phpMyAdmin sets a MySQL user named <strong>phpmyadmin</strong>. In the next terminal prompt, the password for this MySQL username is set (this is different from the <strong>root</strong> MySQL user for which we had set a password in an earlier step).</li></p>
+          <img src="https://usefulangle.com/img/posts/324/18.png" class="img-fluid" alt="Responsive image">
+          <p><li>phpMyAdmin is now installed. This can be tested in the browser by navigating to the <strong>/phpmyadmin</strong> path of the public IP address / DNS of the instance (found in the EC2 management page).<br><br>
+            Enter the username as <strong>phpmyadmin</strong> and the password that was setup in the earlier step.</li></p>
+          <img src="https://usefulangle.com/img/posts/324/19.png" class="img-fluid" alt="Responsive image">
+          <h4>Allowing MySQL Root Login Through phpMyAdmin</h4>
+          <p>This is an optional step and will allow the <strong>root</strong> MySQL user to login through phpMyAdmin.</p>
+          <p><li>Login to MySql root.</li></p>
+          <p><code>sudo mysql -u root -p</code></p>
+          <p><li>Change authentication method for the root account to mysql_native_password by executing the following query.</li></p>
+          <p>Replace <strong>password</strong> by the root password you entered while installing MySQL.</p>
+          <p><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'password';</code></p>
+          <p><li>To put the changes into effect, execute the following query :</li></p>
+          <p><code>FLUSH PRIVILEGES;</code></p>
+          <p><li>Following this, we can now do a root login through phpMyAdmin. The username is <strong>root</strong> and password is the one that was setup earlier while installing MySQL.</li></p>
+          <p><li>Return back to the command line.</li></p>
+          <p><code>exit</code></p>
+
+
 		<hr class="divider">
 		
 		<!-- Navbar
 		============================ -->
         <section id="idocs_navbar">
-          <h2>Navbar</h2>
-		  <p class="lead">Documentation and examples for powerful responsive navigation header</p>
-		  <h4 class="mt-5">Left align</h4>
-          <p>Header with Navigation alligned Left. <span class="text-info">See below image and code for more information.</span></p>
-          <p><a class="popup-img" href="assets/images/navbar-left.jpg"><img class="img-fluid border" src="assets/images/navbar-left.jpg" alt=""></a></p>
-          <p>Add the <code>.justify-content-left</code> class to the element of collapse to display a align left navbar.</p>
-<pre><code class="html">&lt;div id=&quot;header-nav&quot; class=&quot;collapse navbar-collapse justify-content-start&quot;&gt;
-  &lt;ul class=&quot;navbar-nav&quot;&gt;
-    .......
-  &lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
+          <h2>Postfix</h2>
+		  <p class="lead">How to Configure Postfix with Gmail on Ubuntu<br>by <a href="https://www.fosstechnix.com/how-to-configure-postfix-with-gmail-on-ubuntu/">Shweta Mamidwar</a></p>
+		  <h4 class="mt-5">Install Postfix on Ubuntu</h4>
+          <p>Install Postfix using below command:</span></p>
+          <p><code>apt-get install libsasl2-modules postfix</code></p>
+          <p>There will be prompts asking General type of mail configuration. Select Internet Site:</p>
+          <img src="https://www.fosstechnix.com/wp-content/uploads/2022/06/img1.png" class="img-fluid" alt="Responsive image">
+          <p>Enter the fully qualified name of your domain.</p>
+          <img src="https://www.fosstechnix.com/wp-content/uploads/2022/06/img2-1024x334.png" class="img-fluid" alt="Responsive image"><br><br>
+          <h4>Update Postfix main.cf file</h4>
+          <p>After installation of postfix, ensure that the myhostname parameter is configured As shown below</p>
+          <p><code>cat /etc/postfix/main.cf | grep ^myhostname</code></p>
+          <p><strong>Output:</strong></p>
+          <p><code>myhostname = ip-172-31-0-205.ap-south-1.compute.internal</code></p>
+          <h4>Generate Google App Password for Postfix</h4>
+          <p>We need to generate an App password<br><br>
 
-<h4 class="mt-5">Right align</h4>
-          <p>Header with Navigation alligned Right. <span class="text-info">See below image and code for more information.</span></p>
-          <p><a class="popup-img" href="assets/images/navbar-right.jpg"><img class="img-fluid border" src="assets/images/navbar-left.jpg" alt=""></a></p>
-          <p>Add the <code>.justify-content-end</code> class to the element of collapse to display a align right navbar.</p>
-<pre><code class="html">&lt;div id=&quot;header-nav&quot; class=&quot;collapse navbar-collapse justify-content-end&quot;&gt;
-  &lt;ul class=&quot;navbar-nav&quot;&gt;
-    .......
-  &lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
-        
-          <h4 class="mt-5">Center Align</h4>
-          <p>Header with Navigation alligned Center. <span class="text-info">See below image and code for more information.</span></p>
-          <p><img class="img-fluid border" src="assets/images/navbar-center.jpg" alt=""></p>
-          <p>Add the <code>.justify-content-center</code> class to the element of collapse to display a align center navbar.</p>
-          <pre><code class="html">&lt;div id=&quot;header-nav&quot; class=&quot;collapse navbar-collapse justify-content-center&quot;&gt;
-  &lt;ul class=&quot;navbar-nav&quot;&gt;
-    .......
-  &lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
-        </section>
-		
+            Log in to your email, then click the following link: <a href="https://myaccount.google.com/security">Manage your account access and security settings</a>.<br><br>
+            
+            Scroll down to “Signing into Google” and click 2-Step Verification. You may be asked for your password and a verification code before continuing. Ensure that 2-Step Verification is enabled.<br><br>
+            
+            Click the following link to Generate an <a href="https://security.google.com/settings/security/apppasswords">App password</a> for Postfix:</p>
+          <img src="https://www.fosstechnix.com/wp-content/uploads/2022/06/img2-1024x334.png" class="img-fluid" alt="Responsive image"><br><br>
+          <p>Click Select app and choose Other (custom name) from the dropdown. Enter “Postfix” and click Generate.<br><br>
+
+            After generate password you will see like this save your password in secure place</p>
+          <img src="https://www.fosstechnix.com/wp-content/uploads/2022/06/img4.png" class="img-fluid" alt="Responsive image"><br><br>
+          <h4>Add Gmail Username and App Password to Postfix configuration</h4>
+          <p>You need to add your username and password in this file sasl_passwd to this directory /etc/postfix/sasl/<br><br>
+
+            Create /etc/postfix/sasl/sasl_passwd file and add your gmail ID and password we have just created using below command</p>
+          <p><code>sudo nano /etc/postfix/sasl/sasl_passwd</code></p>
+          <p>And add your gmail ID and password as shown in below</p>
+          <p><code>[smtp.gmail.com]:587 example@gmail.com:logwrbyaqcmwslqp</code></p>
+          <p>Create the hash file for Postfix using the postmap command</p>
+          <p><code>postmap /etc/postfix/sasl/sasl_passwd</code></p>
+          <p>After execute postmap command you should have a new file named sasl_passwd.db in the /etc/postfix/.</p>
+          <h4>Secure Your Postfix Hash Database and Email Password Files</h4>
+          <p><code>chown root:root /etc/postfix/sasl/sasl_passwd /etc/postfix/sasl/sasl_passwd.db</code></p>
+          <p><code>chmod 0600 /etc/postfix/sasl/sasl_passwd /etc/postfix/sasl/sasl_passwd.db</code></p>
+          <h4>Configure Relay Host postfix with gmail</h4>
+          <p>Modify the main.cf file using below command:</p>
+          <p><code>sudo nano /etc/postfix/main.cf</code></p>
+          <p>Set the relayhost</p>
+          <p><code>relayhost = [smtp.gmail.com]:587</code></p>
+          <h4>Add Custom Configuration </h4>
+          <p>Open main.cf file and this below line end on the file</p>
+          <p><code>sudo nano /etc/postfix/main.cf</code></p>
+          <p><code># Enable SASL authentication<br>
+            smtp_sasl_auth_enable = yes<br>
+            # Disallow methods that allow anonymous authentication<br>
+            smtp_sasl_security_options = noanonymous<br>
+            # Location of sasl_passwd<br>
+            smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd<br>
+            # Enable STARTTLS encryption<br>
+            smtp_tls_security_level = encrypt<br>
+            # Location of CA certificates<br>
+            smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt</code></p>
+          <p>You need to restart your postfix</p>
+          <p><code>systemctl restart postfix</code></p>
+
 		<hr class="divider">
 		
 		<!-- Sidebar
 		============================ -->
         <section id="idocs_sidebar">
-          <h2>Sidebar</h2>
-          <p class="lead">We have built fixed sidebar navigation with <a target="_blank" href="https://getbootstrap.com/docs/4.4/components/scrollspy/">bootstrap scrollspy</a> function for docs layout. which is automatically update navigation based on scroll position to indicate which link is currently active in the viewport.</p>
-		  <p>The example below sidebar vertical navigation with bootstrap <a target="_blank" href="https://getbootstrap.com/docs/4.4/components/navs/">navs</a> and <a target="_blank" href="https://getbootstrap.com/docs/4.4/components/scrollspy/">scrollspy</a> components and section of docs content.</p>
-		<pre class="pre-scrollable"><code class="html">&lt;!-- Sidebar Navigation
-============================ --&gt;
-&lt;div class=&quot;idocs-navigation bg-light&quot;&gt;
-  &lt;ul class=&quot;nav flex-column &quot;&gt;
-    &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link active&quot; href=&quot;#item_1&quot;&gt;Item 1&lt;/a&gt;
-      &lt;ul class=&quot;nav flex-column&quot;&gt;
-        &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_1_1&quot;&gt;Sub Item 1.1&lt;/a&gt;&lt;/li&gt;
-        &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_1_2&quot;&gt;Sub Item 1.2&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_2&quot;&gt;Item 2&lt;/a&gt;
-      &lt;ul class=&quot;nav flex-column&quot;&gt;
-        &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_2_1&quot;&gt;Sub Item 2.1&lt;/a&gt;&lt;/li&gt;
-        &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_2_2&quot;&gt;Sub Item 2.2&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_3&quot;&gt;Item 3&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#item_4&quot;&gt;Item 4&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;!-- Docs Content
-============================ --&gt;
-&lt;div class=&quot;idocs-content&quot;&gt;
-  &lt;div class=&quot;container&quot;&gt; 
-    
-    &lt;!-- Item 1 --&gt;
-    &lt;section id=&quot;item_1&quot;&gt;
-      &lt;h2&gt;Item 1&lt;/h2&gt;
-      &lt;p&gt;...&lt;/p&gt;
-    &lt;/section&gt;
-    &lt;hr class=&quot;divider&quot;&gt;
-    
-        &lt;!-- Item 1.1 --&gt;
-        &lt;section id=&quot;item_1_1&quot;&gt;
-          &lt;h2&gt;Item 1.1&lt;/h2&gt;
-          &lt;p&gt;...&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;hr class=&quot;divider&quot;&gt;
-        
-        &lt;!-- Item 1.2 --&gt;
-        &lt;section id=&quot;item_1_2&quot;&gt;
-          &lt;h2&gt;Item 1.2&lt;/h2&gt;
-          &lt;p&gt;...&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;hr class=&quot;divider&quot;&gt;
-    
-    &lt;!-- Item 2 --&gt;
-    &lt;section id=&quot;item_2&quot;&gt;
-      &lt;h2&gt;Item 2&lt;/h2&gt;
-      &lt;p&gt;...&lt;/p&gt;
-    &lt;/section&gt;
-    &lt;hr class=&quot;divider&quot;&gt;
-    
-        &lt;!-- Item 2.1 --&gt;
-        &lt;section id=&quot;item_2_1&quot;&gt;
-          &lt;h2&gt;Item 2.1&lt;/h2&gt;
-          &lt;p&gt;...&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;hr class=&quot;divider&quot;&gt;
-        
-        &lt;!-- Item 2.2 --&gt;
-        &lt;section id=&quot;item_2_2&quot;&gt;
-          &lt;h2&gt;Item 2.2&lt;/h2&gt;
-          &lt;p&gt;...&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;hr class=&quot;divider&quot;&gt;
-    
-    &lt;!-- Item 3 --&gt;
-    &lt;section id=&quot;item_3&quot;&gt;
-      &lt;h2&gt;Item 3&lt;/h2&gt;
-      &lt;p&gt;...&lt;/p&gt;
-    &lt;/section&gt;
-    &lt;hr class=&quot;divider&quot;&gt;
-    
-    &lt;!-- Item 4 --&gt;
-    &lt;section id=&quot;item_4&quot;&gt;
-      &lt;h2&gt;Item 4&lt;/h2&gt;
-      &lt;p&gt;...&lt;/p&gt;
-    &lt;/section&gt;
-    
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-		
-		<h4>Light Sidebar:</h4>
-        <p>Light background Color & Dark text for light sidebar. See below image and code for more information.</p>
-		
-		<div class="row">
-		   <div class="col-lg-6">
-			<p><a class="popup-img" href="assets/images/sidebar-light.jpg"><img class="img-fluid border" src="assets/images/sidebar-light.jpg" alt=""></a></p>
-		   </div>
-		</div>
-		
-		<p>Add the <code>.bg-light</code> class to the main sidebar navigation div element to display a light sidebar.</p>
-		<pre><code>&lt;!-- Sidebar Navigation
-============================ --&gt;
-&lt;div class=&quot;idocs-navigation bg-light&quot;&gt;
-  ....
-&lt;/div&gt;</code></pre>
-
-<h4>Dark Sidebar:</h4>
-        <p>Dark background Color & Light text for dark sidebar. See below image and code for more information.</p>
-		
-		<div class="row">
-		   <div class="col-lg-6">
-			<p><a class="popup-img" href="assets/images/sidebar-dark.jpg"><img class="img-fluid border" src="assets/images/sidebar-dark.jpg" alt=""></a></p>
-		   </div>
-		</div>
-		
-		<p>Add the <code>.bg-dark</code> and <code>.docs-navigation-dark</code> class to the main sidebar navigation div element to display a dark sidebar.</p>
-		<pre><code>&lt;!-- Sidebar Navigation
-============================ --&gt;
-&lt;div class=&quot;idocs-navigation bg-dark docs-navigation-dark&quot;&gt;
-  ....
-&lt;/div&gt;</code></pre>
-		</section>
+          <h2>Rsync & Inotify</h2>
+          <p class="lead">For convenience, it was decided to synchronize the files of the website between the two machines, since the files should be identical it was decided to use rsync together with inotify.</p>
+		  <p>At this point, all we need to do for now is install these programs.</p>
+      <p><code>sudo apt install rsync</code></p>
+      <p><code>sudo apt install inotify-tools</code></p>
 		
 		<hr class="divider">
 		
