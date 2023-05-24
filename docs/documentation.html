@@ -108,31 +108,19 @@
 			<li class="nav-item"><a class="nav-link" href="#idocs_header">LAMP Stack</a></li>
 			<li class="nav-item"><a class="nav-link" href="#idocs_navbar">Postfix</a></li>
 			<li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Rsync & Inotify</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_users">Users & Groups</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_content">Installing Scripts</a>
+        <li class="nav-item"><a class="nav-link" href="#idocs_content">Installing Scripts and Website</a>
 			<ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="#idocs_typography">Monitoring</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_code">Rsync</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_backups">Backups</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_components">Website</a></li>
           </ul>
 		</li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_components">Components</a>
-          <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#idocs_accordion">Accordion</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_tabs">Tabs</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_social_icon">Social Icon</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_helper_classes">Helper Classes</a></li>
-          </ul>
-        </li>
-		<li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
         <li class="nav-item"><a class="nav-link" href="#idocs_source_credits">Source & Credits</a></li>
         <li class="nav-item"><a class="nav-link" href="#idocs_support">Support</a></li>
-		<li class="nav-item"><a class="nav-link" href="#idocs_templates">More Templates</a></li>
-		<li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
-			<ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#v1-1">v1.1</a></li>
-            <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0</a></li>
-          </ul>
 		</li>
       </ul>
     </div>
@@ -386,6 +374,7 @@
 		
 		<!-- Sidebar
 		============================ -->
+
         <section id="idocs_sidebar">
           <h2>Rsync & Inotify</h2>
           <p class="lead">For convenience, it was decided to synchronize the files of the website between the two machines, since the files should be identical it was decided to use rsync together with inotify.</p>
@@ -395,10 +384,34 @@
 		
 		<hr class="divider">
 		
+        <section id="idocs_users">
+          <h2>Users & Groups</h2>
+          <p class="lead">When setting up a secure and scalable web application on a Linux server, it is important to consider the appropriate users and groups. Here are some recommended users and groups:</p>
+      
+          <p><li>Create a non-privileged user for the application with a home directory:</li></p>
+      <p><code>sudo adduser appuser</code></p>
+      
+      <p><li>Create a web server user:</li></p>
+      <p>The web server user and group names may vary depending on the specific web server software you are using. Here's an example for Apache:</p>
+      <p><code>sudo adduser --system --no-create-home --disabled-login --group www-data</code></p>
+      <p>This command will create a system user and group called "www-data" without a home directory and disabled login. The "www-data" user and group are commonly used by Apache web server on Ubuntu systems.</p>
+      
+      <p><li>Create a database user:</li></p>
+      <p>Replace <username> and <password> with your desired database username and password.</p>
+      <p><code>sudo mysql<br>
+        CREATE USER '<username>'@'localhost' IDENTIFIED BY '<password>';<br>
+        GRANT ALL PRIVILEGES ON `<database>`.* TO '<username>'@'localhost';<br>
+        FLUSH PRIVILEGES;<br>
+        EXIT;
+        </code></p>
+
+
+    <hr class="divider">
+
 		<!-- Content
 		============================ -->
         <section id="idocs_content">
-          <h2>Installing Scripts</h2>
+          <h2>Installing Scripts and Website</h2>
           <p class="lead mb-5">Installing scripts for monitoring and easier file edit on both machines.</p>
         </section>
 		  
@@ -410,87 +423,87 @@
 		  <h3>The Script</h3>
       <pre><code>#!/bin/bash
 
-        while true; do
-            #CPU CONFIGURATIONS
-        
-            CPU_INFO_FOR_ALERT=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
-            CPU_PERCENT_FOR_ALERT=$(printf "%.0f\n" "$CPU_INFO_FOR_ALERT")
-        
-            CPU_INFO="CPU Usage: $CPU_INFO_FOR_ALERT%"
-        
-            # IF PERCENTAGE IS GREATER THAN 90% - write an ALARM
-            if [ "$CPU_PERCENT_FOR_ALERT" -gt 90 ] # CHANGE THE NUMBER HERE IN ORDER TO CHANGE MAXIMUM PERCENTAGE BEFORE ALARMING | Default - 90
-            then
-              CPU_WARNING="WARNING! CPU PERCENTAGE IS EXTREMELY HIGH!\n"
-              SUBJECT_CPU_WARNING=" (CPU ALARM)"
-              DOES_WARNING_EXIST=10
-            else
-              CPU_WARNING=""
-              SUBJECT_CPU_WARNING=""
-              DOES_WARNING_EXIST=0
-            fi
-        
-            #RAM CONFIGURATIONS
-            RAM_PERCENT_INFO=$(free -m | awk 'NR==2{printf "RAM Usage: %.2f%%", $3*100/$2 }')
-            RAM_PERCENT_FOR_ALERT=$(free -m | awk 'NR==2{printf "%.0f", $3*100/$2 }')
-            RAM_TOTAL=$(free -h | awk '/^Mem/ {print $2}')
-            RAM_USED=$(free -h | awk '/^Mem/ {print $3}')
-            RAM_FREE=$(free -h | awk '/^Mem/ {print $4}')
-            RAM_INFO="RAM Usage: $RAM_USED / $RAM_TOTAL"
-            RAM_PERCENT_FOR_LOGS=$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')
+while true; do
+    #CPU CONFIGURATIONS
+
+    CPU_INFO_FOR_ALERT=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+    CPU_PERCENT_FOR_ALERT=$(printf "%.0f\n" "$CPU_INFO_FOR_ALERT")
+
+    CPU_INFO="CPU Usage: $CPU_INFO_FOR_ALERT%"
+
+    # IF PERCENTAGE IS GREATER THAN 90% - write an ALARM
+    if [ "$CPU_PERCENT_FOR_ALERT" -gt 90 ] # CHANGE THE NUMBER HERE IN ORDER TO CHANGE MAXIMUM PERCENTAGE BEFORE ALARMING | Default - 90
+    then
+      CPU_WARNING="WARNING! CPU PERCENTAGE IS EXTREMELY HIGH!\n"
+      SUBJECT_CPU_WARNING=" (CPU ALARM)"
+      DOES_WARNING_EXIST=10
+    else
+      CPU_WARNING=""
+      SUBJECT_CPU_WARNING=""
+      DOES_WARNING_EXIST=0
+    fi
+
+    #RAM CONFIGURATIONS
+    RAM_PERCENT_INFO=$(free -m | awk 'NR==2{printf "RAM Usage: %.2f%%", $3*100/$2 }')
+    RAM_PERCENT_FOR_ALERT=$(free -m | awk 'NR==2{printf "%.0f", $3*100/$2 }')
+    RAM_TOTAL=$(free -h | awk '/^Mem/ {print $2}')
+    RAM_USED=$(free -h | awk '/^Mem/ {print $3}')
+    RAM_FREE=$(free -h | awk '/^Mem/ {print $4}')
+    RAM_INFO="RAM Usage: $RAM_USED / $RAM_TOTAL"
+    RAM_PERCENT_FOR_LOGS=$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')
+
+    if [ "$RAM_PERCENT_FOR_ALERT" -gt 80 ] #  | Default - 80
+    then
+      RAM_WARNING="WARNING! RAM PERCENTAGE IS EXTREMELY HIGH!\n"
+      SUBJECT_RAM_WARNING=" (RAM ALARM)"
+      DOES_WARNING_EXIST=10
+    else
+      RAM_WARNING=""
+      SUBJECT_RAM_WARNING=""
+      DOES_WARNING_EXIST=0
+    fi
+
+
+    #DISK CONFIGURATION
+    DISK_PERCENT_INFO=$(df -h / | awk '/\//{print "Disk Usage: "$5}')
+    DISK_PERCENT_FOR_ALERT=$(printf "%s\n" "$DISK_PERCENT_INFO" | sed 's/[^0-9]*//g')
+    DISK_TOTAL=$(df -h / | awk '/\//{print $2}')
+    DISK_USED=$(df -h / | awk '/\//{print $3}')
+    DISK_FREE=$(df -h / | awk '/\//{print $4}')
+    DISK_INFO="Disk Usage: $DISK_USED / $DISK_TOTAL"
+    DISK_PERCENT_FOR_LOGS=$(df -h / | awk '/\//{print $5}')
+
+    if [ "$DISK_PERCENT_FOR_ALERT" -gt 80 ] #  | Default - 80
+    then
+      DISK_WARNING="WARNING! DISK PERCENTAGE IS EXTREMELY HIGH!\n"
+      SUBJECT_DISK_WARNING=" (DISK ALARM)"
+      DOES_WARNING_EXIST=10
+    else
+      DISK_WARNING=""
+      SUBJECT_DISK_WARNING=""
+      DOES_WARNING_EXIST=0
+    fi
+
+    #AN EMAIL SENDING CONFIGURATION
+    if [ "$DOES_WARNING_EXIST" -gt 5 ]
+    then
+        EMAIL="yourmail@gmail.com"
+
+        SUBJECT="Test System Information$SUBJECT_CPU_WARNING $SUBJECT_RAM_WARNING $SUBJECT_DISK_WARNING - $(date '+%Y-%m-%d %H:%M:%S')"
+
+        BODY="SYSTEM INFORMATION:\n\n----WARNINGS----\n $CPU_WARNING $RAM_WARNING $DISK_WARNING\n----CPU----\n$CPU_INFO\n\n----RAM----\n$RAM_PERCENT_INFO\n$RAM_INFO\n\n----DISK----\n$DISK_PERCENT_INFO\n$DISK_INFO\n\nKind Regards,\nSelf-Made Monitoring"
+
+        echo -e "Subject: $SUBJECT\n$BODY" | sendmail -t "$EMAIL"
+    fi
             
-            if [ "$RAM_PERCENT_FOR_ALERT" -gt 80 ] #  | Default - 80
-            then
-              RAM_WARNING="WARNING! RAM PERCENTAGE IS EXTREMELY HIGH!\n"
-              SUBJECT_RAM_WARNING=" (RAM ALARM)"
-              DOES_WARNING_EXIST=10
-            else
-              RAM_WARNING=""
-              SUBJECT_RAM_WARNING=""
-              DOES_WARNING_EXIST=0
-            fi
-                
-        
-            #DISK CONFIGURATION
-            DISK_PERCENT_INFO=$(df -h / | awk '/\//{print "Disk Usage: "$5}')
-            DISK_PERCENT_FOR_ALERT=$(printf "%s\n" "$DISK_PERCENT_INFO" | sed 's/[^0-9]*//g')
-            DISK_TOTAL=$(df -h / | awk '/\//{print $2}')
-            DISK_USED=$(df -h / | awk '/\//{print $3}')
-            DISK_FREE=$(df -h / | awk '/\//{print $4}')
-            DISK_INFO="Disk Usage: $DISK_USED / $DISK_TOTAL"
-            DISK_PERCENT_FOR_LOGS=$(df -h / | awk '/\//{print $5}')
-            
-            if [ "$DISK_PERCENT_FOR_ALERT" -gt 80 ] #  | Default - 80
-            then
-              DISK_WARNING="WARNING! DISK PERCENTAGE IS EXTREMELY HIGH!\n"
-              SUBJECT_DISK_WARNING=" (DISK ALARM)"
-              DOES_WARNING_EXIST=10
-            else
-              DISK_WARNING=""
-              SUBJECT_DISK_WARNING=""
-              DOES_WARNING_EXIST=0
-            fi
-        
-            #AN EMAIL SENDING CONFIGURATION
-            if [ "$DOES_WARNING_EXIST" -gt 5 ]
-            then
-                EMAIL="yourmail@gmail.com"
-        
-                SUBJECT="Test System Information$SUBJECT_CPU_WARNING $SUBJECT_RAM_WARNING $SUBJECT_DISK_WARNING - $(date '+%Y-%m-%d %H:%M:%S')"
-        
-                BODY="SYSTEM INFORMATION:\n\n----WARNINGS----\n $CPU_WARNING $RAM_WARNING $DISK_WARNING\n----CPU----\n$CPU_INFO\n\n----RAM----\n$RAM_PERCENT_INFO\n$RAM_INFO\n\n----DISK----\n$DISK_PERCENT_INFO\n$DISK_INFO\n\nKind Regards,\nSelf-Made Monitoring"
-        
-                echo -e "Subject: $SUBJECT\n$BODY" | sendmail -t "$EMAIL"
-            fi
-            
-            #MAKING LOG FILES
-        
-            echo "Time: $(date '+%H:%M:%S')\n\nWarnings:$SUBJECT_CPU_WARNING $SUBJECT_RAM_WARNING $SUBJECT_DISK_WARNING\n$CPU_INFO\n$RAM_INFO ($RAM_PERCENT_FOR_LOGS)\n$DISK_INFO ($DISK_PERCENT_FOR_LOGS)\n------------------------\n" >> /home/ubuntu/logs/$(date '+%Y-%m-%d').log
-            
-            
-            #PAUSE
-            sleep 60
-        done
+    #MAKING LOG FILES
+
+    echo "Time: $(date '+%H:%M:%S')\n\nWarnings:$SUBJECT_CPU_WARNING $SUBJECT_RAM_WARNING $SUBJECT_DISK_WARNING\n$CPU_INFO\n$RAM_INFO ($RAM_PERCENT_FOR_LOGS)\n$DISK_INFO ($DISK_PERCENT_FOR_LOGS)\n------------------------\n" >> /home/ubuntu/logs/$(date '+%Y-%m-%d').log
+
+
+    #PAUSE
+    sleep 60
+done
         </code></pre>
         <p>Before making the script being activated on the startup it is firstly needed to put it on the machines. You can do this in a way that is convenient for you. </p>
         <p>To make this script work automatically on the system reboot via crontab just type this command:</p>
@@ -507,13 +520,26 @@
 		  
 		  <h3 class="mt-5">The Script</h3>
 		  <pre><code>#!/bin/bash
-        while inotifywait -r -e modify,create,delete,move /path/to/website; do
-          rsync -avz /path/to/website user@ip-address:/path/to/website
-        done
+
+while inotifywait -r -e modify,create,delete,move /path/to/website; do
+  rsync -avz /path/to/website user@ip-address:/path/to/website
+done
       </code></pre>
       <p>To make this script run on a startup you can also add it to crontab by using this commands:</p>
       <p><code>crontab -e</code></p>
       <p><code>@reboot sleep 45 && sh /path/to/file/syncwebpages.sh</code></p>
+
+		<hr class="divider">
+
+
+		<section id="idocs_backups">
+		  <h2>Backups</h2>
+		  <p class="text-4">The command that makes backups. It also can be created as a script and be placed in crontab but in this project, it is existing as an example on a test instance.</p>
+		  
+		  <h3 class="mt-5">The Script</h3>
+		  <pre><code>
+sudo tar czf /backup.tar.gz --exclude=/backup.tar.gz --exclude=/home --exclude=/media --exclude=/dev --exclude=/mnt --exclude=/proc --exclude=/sys --exclude=/tmp /
+      </code></pre>
 
 		<hr class="divider">
 		
@@ -521,7 +547,9 @@
 		============================ -->
         <section id="idocs_components">
           <h2>Website Installation</h2>
-          <p class="mb-5">Installing a website on a LAMP Server</p>
+          <p class="mb-5">Installing a website on a LAMP Server.</p>
+          <p><strong>NOTE!</strong></p>
+          <p>In my case, the website sync is only installed on the <strong>lamp1</strong> machine. Therefore, all changes to the site must be made exactly on this machine so that changes are automatically transferred to the other.</p>
         </section>
 		  
 		  <!-- Accordion
@@ -531,328 +559,29 @@
             <p>In order to clone repository from GitHub you need to write this command:</p>
             <p><code>cd /var/www/html</code></p>
             <p><code>git clone https://github.com/Vosmyerka/linux-final-2023</code></p>
+            <p><code>cp -r linux-final-2023</code></p>
+            <p><code>rm -rf linux-final-2023</code></p>
 			
           
 		  <hr class="divider">
-		  
-		  <!-- Tabs
-		  ============================ -->
-		  <section id="idocs_tabs">
-            <h2>Tabs</h2>
-            <p class="text-4">Default <a href="https://getbootstrap.com/docs/4.4/components/navs/#javascript-behavior">Bootstrap Nav</a> component combined with iDocs for unique tabs.</p>
-			<p>See below image and code for more information.</p>
-			<p><a class="popup-img" href="assets/images/tabs.jpg"><img class="img-fluid border" src="assets/images/tabs.jpg" alt=""></a></p>
-			
-            <pre><code class="html">&lt;ul class=&quot;nav nav-tabs&quot; id=&quot;myTab&quot; role=&quot;tablist&quot;&gt;
-  &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;
-    &lt;a class=&quot;nav-link active&quot; id=&quot;home-tab&quot; data-toggle=&quot;tab&quot; href=&quot;#home&quot; role=&quot;tab&quot; aria-controls=&quot;home&quot; aria-selected=&quot;true&quot;&gt;Home&lt;/a&gt;
-  &lt;/li&gt;
-  &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;
-    &lt;a class=&quot;nav-link&quot; id=&quot;profile-tab&quot; data-toggle=&quot;tab&quot; href=&quot;#profile&quot; role=&quot;tab&quot; aria-controls=&quot;profile&quot; aria-selected=&quot;false&quot;&gt;Profile&lt;/a&gt;
-  &lt;/li&gt;
-  &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;
-    &lt;a class=&quot;nav-link&quot; id=&quot;contact-tab&quot; data-toggle=&quot;tab&quot; href=&quot;#contact&quot; role=&quot;tab&quot; aria-controls=&quot;contact&quot; aria-selected=&quot;false&quot;&gt;Contact&lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;tab-content my-3&quot; id=&quot;myTabContent&quot;&gt;
-  &lt;div class=&quot;tab-pane fade show active&quot; id=&quot;home&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;home-tab&quot;&gt;This is Tab Content Home&lt;/div&gt;
-  &lt;div class=&quot;tab-pane fade&quot; id=&quot;profile&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot;&gt;This is Tab Content Profile&lt;/div&gt;
-  &lt;div class=&quot;tab-pane fade&quot; id=&quot;contact&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;contact-tab&quot;&gt;This is Tab Content Contact&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            
-			<h4>Options:</h4>
-            <div class="table-responsive">
-			<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Type Class</th>
-      <th>Features</th>
-      <th>Code Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Basic Navs</code></td>
-      <td>Basic Navs Style for the Tabs</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;nav &quot; id=&quot;myTab&quot; role=&quot;tablist&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	<tr>
-      <td><code>.nav-separator</code></td>
-      <td>Basic Navs Style with Separator for the Tabs</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;nav &quot; id=&quot;myTab&quot; role=&quot;tablist&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	<tr>
-      <td><code>.nav-tabs</code></td>
-      <td>Tabs Navs Style for the Tabs. For example - above Preview Example.</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;nav nav-tabs&quot; id=&quot;myTab&quot; role=&quot;tablist&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	<tr>
-      <td><code>.nav-pills</code></td>
-      <td>Pills Navs Style for the Tabs</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;nav nav-pills&quot; id=&quot;myTab&quot; role=&quot;tablist&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	
-  </tbody>
-</table>
-</div>
-          </section>
-          
-		  <hr class="divider">
-		  		  
-          <!-- Social Icon
-		  ============================ -->
-		  <section id="idocs_social_icon">
-            <h3>Social Icon</h3>
-            <p>Social links with different styles. See below code for more information.</p>
-            <pre><code class="html">&lt;div class=&quot;d-flex flex-column&quot;&gt;
-  &lt;ul class=&quot;social-icons&quot;&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.facebook.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Facebook&quot;&gt;&lt;i class=&quot;fab fa-facebook-f&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.twitter.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Twitter&quot;&gt;&lt;i class=&quot;fab fa-twitter&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.google.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Google&quot;&gt;&lt;i class=&quot;fab fa-google&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.linkedin.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Linkedin&quot;&gt;&lt;i class=&quot;fab fa-linkedin-in&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.youtube.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Youtube&quot;&gt;&lt;i class=&quot;fab fa-youtube&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a data-toggle=&quot;tooltip&quot; href=&quot;http://www.instagram.com/&quot; target=&quot;_blank&quot; title=&quot;&quot; data-original-title=&quot;Instagram&quot;&gt;&lt;i class=&quot;fab fa-instagram&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-</code></pre>
-            <h4>Options:</h4>
-			<div class="table-responsive">
-			<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Type Class</th>
-      <th>Features</th>
-      <th>Code Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Default (Dark)</td>
-      <td>Default Social Icon with Dark Color</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;social-icons&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-    <tr>
-      <td><code>.social-icons-light</code></td>
-      <td>Social Icon with Light Color</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;social-icons social-icons-light&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	<tr>
-      <td><code>.social-icons-muted</code></td>
-      <td>Social Icon with Muted Color</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;social-icons social-icons-muted&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-	<tr>
-      <td><code>.social-icons-sm</code></td>
-      <td>Social Icon with Small Icon Size</td>
-      <td>
-	  <pre class="mb-0"><code>&lt;ul class=&quot;social-icons social-icons-sm&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre>
-	  </td>
-    </tr>
-	<tr>
-      <td><code>.social-icons-lg</code></td>
-      <td>Social Icon with Large Icon Size</td>
-      <td><pre class="mb-0"><code>&lt;ul class=&quot;social-icons social-icons-lg&quot;&gt;
-  .......
-&lt;/ul&gt;</code></pre></td>
-    </tr>
-    
-  </tbody>
-</table>
-</div>
-          </section>
-		  
-		  <hr class="divider">
-		  
-		  <!-- Helper Classes
-		  ============================ -->
-          <section id="idocs_helper_classes">
-            <h3>Helper Classes</h3>
-            <p>We have created some really useful helper classes for you. Here are a few of them. also, You can refer other default bootstrap helper classes here: <a class="ml-1" target="_blank" href="https://getbootstrap.com/docs/4.4/utilities/"><i class="fas fa-external-link-alt"></i> Bootstrap Documentation</a> </p>
-			            
-			<h5>Text Size:</h5>
-            <ul>
-              <li><code>.text-0</code> - Changes the Font size to 11px.</li>
-              <li><code>.text-1</code> - Changes the Font size to 12px.</li>
-              <li><code>.text-2</code> - Changes the Font size to 14px.</li>
-              <li><code>.text-3</code> - Changes the Font size to 16px.</li>
-              <li><code>.text-4</code> - Changes the Font size to 18px.</li>
-              <li><code>.text-5</code> - Changes the Font size to 21px.</li>
-              <li><code>.text-6</code> - Changes the Font size to 24px.</li>
-              <li><code>.text-7</code> - Changes the Font size to 28px.</li>
-              <li><code>.text-8</code> - Changes the Font size to 32px.</li>
-              <li><code>.text-9</code> - Changes the Font size to 36px.</li>
-              <li><code>.text-10</code> - Changes the Font size to 40px.</li>
-              <li><code>.text-11</code> - Changes the Font size to 44px.</li>
-              <li><code>.text-12</code> - Changes the Font size to 48px.</li>
-              <li><code>.text-13</code> - Changes the Font size to 52px.</li>
-              <li><code>.text-14</code> - Changes the Font size to 56px.</li>
-              <li><code>.text-15</code> - Changes the Font size to 60px.</li>
-              <li><code>.text-16</code> - Changes the Font size to 64px.</li>
-              <li><code>.text-17</code> - Changes the Font size to 72px.</li>
-              <li><code>.text-18</code> - Changes the Font size to 80px.</li>
-              <li><code>.text-19</code> - Changes the Font size to 84px.</li>
-              <li><code>.text-20</code> - Changes the Font size to 92px.</li>
-            </ul>
-            <h5>Font Weight:</h5>
-            <ul>
-              <li><code>.font-weight-100</code> - For font weight of 100.</li>
-              <li><code>.font-weight-200</code> - For font weight of 200.</li>
-              <li><code>.font-weight-300</code> - For font weight of 300.</li>
-              <li><code>.font-weight-400</code> - For font weight of 400.</li>
-              <li><code>.font-weight-500</code> - For font weight of 500.</li>
-              <li><code>.font-weight-600</code> - For font weight of 600.</li>
-              <li><code>.font-weight-700</code> - For font weight of 700.</li>
-              <li><code>.font-weight-800</code> - For font weight of 800.</li>
-              <li><code>.font-weight-900</code> - For font weight of 900.</li>
-            </ul>
-            <h5>Background Color:</h5>
-            <ul>
-              <li><code>.bg-transparent</code> - For background color of transparent</li>
-              <li><code>.bg-light</code> - For background color of light gray</li>
-              <li><code>.bg-light-1</code> - For background color of more light gray</li>
-              <li><code>.bg-light-2</code> - For background color of more light gray</li>
-              <li><code>.bg-light-3</code> - For background color of more light gray</li>
-              <li><code>.bg-light-4</code> - For background color of more light gray</li>
-              <li><code>.bg-dark</code> - For background color of dark</li>
-              <li><code>.bg-dark-1</code> - For background color of dark gray</li>
-              <li><code>.bg-dark-2</code> - For background color of more dark gray</li>
-              <li><code>.bg-dark-3</code> - For background color of more dark gray</li>
-              <li><code>.bg-dark-4</code> - For background color of more dark gray</li>
-            </ul>
-            <h5>Box Shadow</h5>
-            <ul>
-              <li><code>.shadow-none</code> - For No shadow to elements with box-shadow utilities.</li>
-              <li><code>.shadow-sm</code> - For Small shadow to elements with box-shadow utilities.</li>
-              <li><code>.shadow</code> - For Regular shadow to elements with box-shadow utilities.</li>
-              <li><code>.shadow-md</code> - For medium light shadows to elements with box-shadow utilities.</li>
-              <li><code>.shadow-lg</code> - For Larger shadows to elements with box-shadow utilities.</li>
-            </ul>
-            <h5>Opacity</h5>
-            <ul>
-              <li><code>.opacity-1</code> - For 10% opacity.</li>
-              <li><code>.opacity-2</code> - For 20% opacity.</li>
-              <li><code>.opacity-3</code> - For 30% opacity.</li>
-              <li><code>.opacity-4</code> - For 40% opacity.</li>
-              <li><code>.opacity-5</code> - For 50% opacity.</li>
-              <li><code>.opacity-6</code> - For 60% opacity.</li>
-              <li><code>.opacity-7</code> - For 70% opacity.</li>
-              <li><code>.opacity-8</code> - For 80% opacity.</li>
-              <li><code>.opacity-9</code> - For 90% opacity.</li>
-            </ul>
-            <h5>Border Radius</h5>
-            <ul>
-              <li><code>.rounded-top-0</code> - No Border Radius for top.</li>
-              <li><code>.rounded-bottom-0</code> - No Border Radius for bottom.</li>
-              <li><code>.rounded-left-0</code> - No Border Radius for left.</li>
-              <li><code>.rounded-right-0</code> - No Border Radius for right.</li>
-            </ul>
-            <h5>Borders, Sizing, Spacing (margin & padding) and also much more....</h5>
-            <div class="alert alert-info">You can refer for use other default bootstrap helper classes here - <a href="https://getbootstrap.com/docs/4.4/utilities/">https://getbootstrap.com/docs/4.4/utilities/</a></div>
-          </section>
-        
-        
-		<hr class="divider">
-		
-		<!-- FAQ
-		============================ -->
-		<section id="idocs_faq">
-          <h2>FAQ</h2>
-          <p class="text-4">A FAQ is a list of frequently asked questions (FAQs) and answers on a particular topic.</p>
-          
-		  <div class="row">
-          <div class="col-lg-12">
-            <div class="accordion accordion-alterate arrow-right" id="popularTopics">
-              <div class="card">
-                <div class="card-header" id="heading1">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">What does royalty free mean?</a> </h5>
-                </div>
-                <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#popularTopics">
-                  <div class="card-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading2">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">What is a single application?</a> </h5>
-                </div>
-                <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#popularTopics">
-                  <div class="card-body"> Iisque Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading3">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">What are some examples of permitted end products?</a> </h5>
-                </div>
-                <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#popularTopics">
-                  <div class="card-body"> Iisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading4">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">I'm not sure if my use is covered. What should I do?</a> </h5>
-                </div>
-                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#popularTopics">
-                  <div class="card-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading5">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">What is a single application?</a> </h5>
-                </div>
-                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#popularTopics">
-                  <div class="card-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="heading6">
-                  <h5 class="mb-0"> <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">Am I allowed to modify the item that I purchased?</a> </h5>
-                </div>
-                <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#popularTopics">
-                  <div class="card-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Ad vegan excepteur butcher vice lomo. </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-          
-        </section>
-        
-		<hr class="divider">
         
         <!-- Source & Credits
 		============================ -->
         <section id="idocs_source_credits">
           <h2>Source & Credits</h2>
-          <h4>Images:</h4>
+          <h4>Software Installation Guides:</h4>
           <ul>
-            <li>Unsplash - <a target="_blank" href="https://unsplash.com/">https://unsplash.com/</a></li>
+            <li>How to Install LAMP (Linux, Apache, MySql & PHP) on AWS EC2 with Ubuntu 20.04 - <a target="_blank" href="https://usefulangle.com/post/324/aws-ec2-install-linux-apache-mysql-php-phpmyadmin-lamp-stack-ubuntu-20-04">https://usefulangle.com/post/324/aws-ec2-install-linux-apache-mysql-php-phpmyadmin-lamp-stack-ubuntu-20-04</a></li>
+            <li>How to Configure Postfix with Gmail on Ubuntu - <a target="_blank" href="https://www.fosstechnix.com/how-to-configure-postfix-with-gmail-on-ubuntu/">https://www.fosstechnix.com/how-to-configure-postfix-with-gmail-on-ubuntu/</a></li>
           </ul>
-		  <h4>Fonts:</h4>
+		  <h4>Website:</h4>
           <ul>
-            <li>Icons Font Face - <a target="_blank" href="https://fontawesome.com/">https://fontawesome.com/</a></li>
+            <li>Main Website (GetTemplates) - <a target="_blank" href="https://gettemplates.co/">https://gettemplates.co/</a></li>
+            <li>Docs Website (Harnish Design) - <a target="_blank" href="https://harnishdesign.net/">https://harnishdesign.net/</a></li>
           </ul>
-          <h4>Scripts:</h4>
+      <h4>Additional Links:</h4>
           <ul>
-            <li>jQuery - <a target="_blank" href="http://www.jquery.com/">http://www.jquery.com/</a></li>
-            <li>Bootstrap 4 - <a target="_blank" href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
-			<li>Highlight Js - <a target="_blank" href="https://highlightjs.org/">https://highlightjs.org/</a></li>
-			<li>jQuery easing - <a target="_blank" href="http://gsgd.co.uk/sandbox/jquery/easing/">http://gsgd.co.uk/sandbox/jquery/easing/</a></li>
-            <li>Magnific Popup - <a target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/">http://dimsemenov.com/plugins/magnific-popup/</a></li>
+            <li>How to make backups (Losst) - <a target="_blank" href="https://losst.pro/rezervnoe-kopirovanie-ubuntu">https://losst.pro/rezervnoe-kopirovanie-ubuntu</a></li></li>
           </ul>
         </section>
         
@@ -868,35 +597,6 @@
 		
 		<hr class="divider">
 		
-        <!-- Changelog
-		============================ -->
-		
-        <section id="idocs_changelog">
-          <h2>Changelog</h2>
-          <p class="text-4">See what's new added, changed, fixed, improved or updated in the latest versions. </p>
-		  <p class="alert alert-info mb-5"> For Future Updates Follow Us <a target="_blank" href="https://discord.gg/6ucmqa6K39">Discord</a></p>
-          
-		  <h3 id="v1-1">Version ∞ <small class="text-muted">(12 May, 2023)</small></h3>
-          <ul class="changelog">
-            <li><span class="badge badge-success">Added</span> Your information here for added new feature</li>
-            <li><span class="badge badge-danger">Fixed</span> Some minor bugs for browser compatibility</li>
-			<li><span class="badge badge-danger">Fixed</span> Some minor bugs for responsive</li>
-            <li><span class="badge badge-info">Updated</span> FontAwesome to Latest Version</li>
-			<li><span class="badge badge-info">Updated</span> Bootstrap to Latest Version</li>
-			<li><span class="badge badge-info">Updated</span> Improvements in CSS and JS</li>
-          </ul>
-		  
-		  <hr class="divider">
-		  
-          <h3 id="v1-0">Version 1.0 <small class="text-muted">(6 May, 2023)</small></h3>
-          <p>Initial Release</p>
-        </section>        
-        
-      </div>
-    </div>
-	
-  </div>
-  <!-- Content end --> 
   
   <!-- Footer
   ============================ -->
